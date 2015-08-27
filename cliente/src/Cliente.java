@@ -1,11 +1,14 @@
 
 import java.io.IOException;
+import javax.swing.JFrame;
 public class Cliente{
     
     public static void main(String[] args) throws IOException {
         int playersNaSala;
         String[] Ips;
         System.out.println("tamanho do args = "+args.length);
+        JFrame janela = new Login();
+        janela.setVisible(true);
         if(args.length<2){
             System.out.println("java Cliente numeroDeJogadoresNaSala ip1 ip2 ip3 \n"
                     + "sendo ips os ips dos servidores de sala. (minimo de"
