@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.SocketImpl;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 public class ServidorSalas {
     public static final int PORTAREGISTRARECURSOS = 50000;
     public static final int PORTACONECTACLIENTES = 50001;
+    public static final int PORTAGERENCIADORDECADASTRO = 50002;
     public static final int PORTATROCAINFOPESO = 50012;
     public static final int PORTAANUNCIALIDER = 50013;
     public static final int PORTAAVISOSVIVO= 50014;
@@ -14,8 +16,11 @@ public class ServidorSalas {
     public static final int PORTAATUALIZACARGASERVIDORES= 50021;
     public static final int PORTAATUALIZASALASREPLICAS= 50030;
     public static final int PORTAATUALIZASERVIDORESREPLICAS= 50031;
+    public static final int PORTAATUALIZAJOGADORES= 50032;
     public static ArrayList<ServidorDeJogo> servidoresDeJogo = new ArrayList<>();
     public static final Object mutexServidoresDeJogo = new Object();  //nao pode usar o syncronized do arraylist pq ele pode ser sobrescrito
+    public static ArrayList<Jogador> jogadores = new ArrayList<>();
+    public static final Object mutexJogadores = new Object();
     
     public static ArrayList<Sala> salasEmMontagem = new ArrayList<>();
     public static final Object mutexSalasEmMontagem = new Object(); //nao pode usar o syncronized do arraylist pq ele pode ser sobrescrito
@@ -51,6 +56,8 @@ public class ServidorSalas {
         System.out.println("iniciou thread recebedora de salas atualizadas");
         new ThreadRecebeServidoresDeJogoAtualizados().start();
         System.out.println("iniciou a thread recebedora de servidores de jogo atualizados");
+        new ThreadRecebeJogadoresAtualizados().start();
+        System.out.println("iniciou a thread recebedora de jogadores atualizados");
         
         if(vizinhos.size()>0){
             System.out.println(">>>>aperte enter depois que todos servidores de salas "
@@ -62,12 +69,8 @@ public class ServidorSalas {
             System.out.println("");
         }
         
-        
-        
         System.out.println("verificando se é lider");
         ehLider = verificaSeEhLider();
-        
-        
         
         if(ehLider){
             System.out.println("sou lider");
@@ -155,6 +158,8 @@ public class ServidorSalas {
             threadsVivas[0].start();
             threadsVivas[1] = new ThreadGerenciadorDeSalas();
             threadsVivas[1].start();
+            threadsVivas[2] = new ThreadGerenciadorDeCadastro();
+            threadsVivas[2].start();
             
         } catch (UnknownHostException ex) {
             System.out.println("erro abrindo as threads de lider");

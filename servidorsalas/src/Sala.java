@@ -5,17 +5,17 @@ import java.util.ArrayList;
 //PROTOCOLO ip1;ip2;ip3;ip4;etc
 
 public class Sala {
-    private ArrayList<String> IPs;
+    private ArrayList<Jogador> jogadores;
     private ServidorDeJogo servidorAlvo;
 
     public Sala(ServidorDeJogo servidorAlvo) {
         this.servidorAlvo = servidorAlvo;
-        this.IPs = new ArrayList<>(); 
+        this.jogadores = new ArrayList<>(); 
     }
     
-    public void adicionaJogador(String ip){
-        this.IPs.add(ip);
-        if(IPs.size()==servidorAlvo.clientesPorSala){
+    public void adicionaJogador(Jogador jogador){
+        this.jogadores.add(jogador);
+        if(jogadores.size()==servidorAlvo.clientesPorSala){
             if(validaJogadoresAntesDeEnviar()){
                 System.out.println("todos jogadores da sala estão ok. Mandando array de jogadores ");
                 enviaParaServidor();
@@ -24,7 +24,7 @@ public class Sala {
                         + "jogadores desconectados que foram removidos");
             }
         }else{
-            System.out.println("adicionou jogador na sala,"+IPs.size()+" de "+servidorAlvo.clientesPorSala);
+            System.out.println("adicionou jogador na sala,"+jogadores.size()+" de "+servidorAlvo.clientesPorSala);
         }
     }
     
@@ -35,10 +35,10 @@ public class Sala {
     private boolean validaJogadoresAntesDeEnviar(){
         Conexao conexao = null;
         boolean valido = true;
-        ArrayList<String> filaDaMorte = new ArrayList<>();
-        for(String ip:IPs){
+        ArrayList<Jogador> filaDaMorte = new ArrayList<>();
+        for(Jogador j : jogadores){
             try{
-                conexao = new Conexao(ip, ServidorSalas.PORTACONECTACLIENTES);
+                conexao = new Conexao(j.IP, ServidorSalas.PORTACONECTACLIENTES);
                 conexao.envia("ta vivo champs?");
                 String recebido = conexao.recebe();
                 if(recebido.equals("sim")){
@@ -46,24 +46,24 @@ public class Sala {
                 }
                 
             }catch(IOException e){
-                System.out.println("o jogador "+ip+"não parece estar mais conectado, sala continua na fila");
-                filaDaMorte.add(ip);
+                System.out.println("o jogador "+j.IP+"não parece estar mais conectado, sala continua na fila");
+                filaDaMorte.add(j);
                 valido = false;
             }
         }
         
-        for(String morto:filaDaMorte){ //nao pode remover dentro do for 
-            IPs.remove(morto);
-            System.out.println("jogador "+morto+" removido da sala");
+        for(Jogador morto : filaDaMorte){ //nao pode remover dentro do for 
+            jogadores.remove(morto);
+            System.out.println("jogador "+morto.login+" removido da sala");
         }
         return valido;
     }
     
     private void enviaParaServidor(){
         
-        String mensagem = IPs.get(0);
-        for(int x=1;x>IPs.size();x++){
-            mensagem +=";"+IPs.get(x);
+        String mensagem = jogadores.get(0).IP;
+        for(int x=1;x>jogadores.size();x++){
+            mensagem +=";"+jogadores.get(x).IP;
         }
         
         try {

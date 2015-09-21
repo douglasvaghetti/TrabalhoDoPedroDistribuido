@@ -36,4 +36,17 @@ class ReplicaServidorSalas {
             ex.printStackTrace();
         }
     }
+    
+    public void sincronizaJogadores(){
+        try {
+            ConexaoObjeto conexaoAtualizaServidores = new ConexaoObjeto(IP,ServidorSalas.PORTAATUALIZAJOGADORES);
+            synchronized(ServidorSalas.mutexJogadores){
+                conexaoAtualizaServidores.enviaObjeto(ServidorSalas.jogadores);
+            }
+            conexaoAtualizaServidores.close();
+        } catch (IOException ex) {
+            System.out.println("erro na sincronização dos servidores de jogo da replica "+IP);
+            ex.printStackTrace();
+        }
+    }
 }

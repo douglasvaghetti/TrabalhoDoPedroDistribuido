@@ -6,6 +6,12 @@ public class SincronizacaoReplicas {
         }
     }
     
+    public static void sincronizaJogadores(){
+        for(ReplicaServidorSalas r: ServidorSalas.vizinhos){
+            r.sincronizaJogadores();
+        }
+    }
+    
     public static void sincronizaServidoresDeJogo(){
         for(ReplicaServidorSalas r: ServidorSalas.vizinhos){
             r.sincronizaServidoresDeJogo();
