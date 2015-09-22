@@ -36,7 +36,7 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
                 } else {
                     novaConexao.envia(autenticado.gold ? "autenticadoGold" : "autenticadoComum");
                 }
-
+                String personagem = novaConexao.recebe();
                 //falta confirma a entrada do jogador na sala.
                 int qtdPessoasPorSala = Integer.parseInt(novaConexao.recebe());
                 System.out.println("recebeu mensage de pedido de jogo do jogador" + autenticado.IP);
@@ -54,6 +54,7 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
                 } else {
                     novaConexao.envia("naoDeuLesk");
                 }
+                novaConexao.close();
             }
         } catch (IOException ex) {
             System.out.println("redirecionador para jogos fechado");

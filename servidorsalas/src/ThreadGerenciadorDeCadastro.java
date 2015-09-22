@@ -13,6 +13,7 @@ public class ThreadGerenciadorDeCadastro extends ThreadLimpavel{
                 
                String login = novaConexao.recebe();
                String senha = novaConexao.recebe();
+               String gold = novaConexao.recebe();
                
                boolean jaExiste = false;
                
@@ -27,9 +28,13 @@ public class ThreadGerenciadorDeCadastro extends ThreadLimpavel{
                     continue;
                 }else{
                     Jogador novo = new Jogador(login, senha);
+                    if(gold.equals("gold")){
+                            novo.gold = true;
+                        }
                     synchronized(ServidorSalas.mutexJogadores){
                         ServidorSalas.jogadores.add(novo);
-                        SincronizacaoReplicas.sincronizaJogadores();                    
+                        SincronizacaoReplicas.sincronizaJogadores();
+                        
                         novaConexao.envia("cadastroEfetuado");
                     }
                 }

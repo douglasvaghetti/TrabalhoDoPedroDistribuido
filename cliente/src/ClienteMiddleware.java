@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,11 +12,12 @@ import javax.swing.JOptionPane;
 
 public class ClienteMiddleware {
 
-    private static String[] ipsServidoresSalas;
+    private static String[] ipsServidoresSalas = {"192.168.0.34"};
     private static final int PORTASERVIDORSALAS = 50001;
     private static final int PORTASERVIDORCADASTRO = 50002;
     public final int PORTASERVIDORJOGO = 50003;
     public static String tipoUsuario = "comum";
+    private static Conexao conectado = null;
 
     private Socket jogo;
 
@@ -41,34 +43,38 @@ public class ClienteMiddleware {
                 conexao.envia(senha);
                 String resposta = conexao.recebe();
                 if (resposta.equals("autenticadoComum")) {
+                    conectado = conexao;
                     return true;
                 } else {
                     if (resposta.equals("autenticadoGold")) {
+                        conectado = conexao;
                         tipoUsuario = "gold";
                         return true;
                     }
                 }
+                conexao.close();
             } catch (IOException ex) {
                 System.out.println("Erro ao enviar mensagem de autenticacao");
             }
 
         }
+        conectado = null;
         return false;
     }
 
-    public static boolean cadastrar(String login, String senha) {
-
+    public static boolean cadastrar(String login, String senha, String gold) {
         for (String ip : ipsServidoresSalas) {
-            Conexao conexao;
             try {
                 System.out.println("Ok, contatando o servidor");
-                conexao = new Conexao(ip, PORTASERVIDORCADASTRO);
+                Conexao conexao = new Conexao(ip, PORTASERVIDORCADASTRO);
                 conexao.envia(login);
                 conexao.envia(senha);
+                conexao.envia(gold);
                 String resposta = conexao.recebe();
                 if (resposta.equals("cadastroEfetuado")) {
                     return true;
                 }
+                conexao.close();
             } catch (IOException e) {
                 System.out.println("ip " + ip + " nao está conectado ou não é o lider, tentando o proximo");
                 continue;
@@ -89,4 +95,28 @@ public class ClienteMiddleware {
         }
         return md5;
     }
+    
+    public static void esperaPartida(int numeroJogadores, String personagem){
+        if(conectado != null){
+            try {
+                
+                conectado.envia(personagem);
+                conectado.envia(numeroJogadores);
+                
+                //resposta da ThreadGerenciadorDeSalas
+                System.out.println("Resposta= "+conectado.recebe());
+                conectado.close();
+                
+                ServerSocket esperaPartida = new ServerSocket(50050);
+                Conexao conexao = new Conexao(esperaPartida.accept());
+                String servidor = conexao.recebe();
+                //Aqui conecta no servidor de jogo (chama o lua);
+            } catch (IOException ex) {
+                Logger.getLogger(ClienteMiddleware.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Você não deve chegar aqui sem estar logado seu malandrinho!");
+        }
+    }
+    
 }
