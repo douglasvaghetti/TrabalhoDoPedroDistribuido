@@ -55,7 +55,7 @@ public class ConexaoSegura {
         objOut.writeObject(Criptografia.criptografa(o.getBytes(), keyCompartilhada));
     }
 
-    public void enviaObjeto(Object o) throws IOException {
+    private void enviaObjeto(Object o) throws IOException {
         if (objOut == null) {
             objOut = new ObjectOutputStream(socket.getOutputStream());
         }
