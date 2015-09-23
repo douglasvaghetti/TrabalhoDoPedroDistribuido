@@ -17,6 +17,7 @@ public class ConexaoSegura {
     private String keyParticular = "abcdefghijklmnop";
     
     public ConexaoSegura(Socket socket) throws IOException {
+        
         this.keyParticular = JOptionPane.showInputDialog("Informe sua chave particular");
         this.socket = socket;
         try {

@@ -3,7 +3,6 @@ import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
@@ -32,6 +31,7 @@ public class Criptografia {
             msn += "*";
         }
         */
+        System.out.println("Criptografando + "+new String(msn));
         try {
             Cipher c;
             c = Cipher.getInstance("AES");
@@ -55,8 +55,8 @@ public class Criptografia {
     }
     
     public static byte[]  descriptografa(byte[] msn, byte[] key) {
-        System.out.println("Tamanho da menssagem = "+msn.length);
-        
+        System.out.println("Descriptogravando tamanho da menssagem = "+msn.length);
+        System.out.println("msg = "+new String(msn));
         try {
             Cipher c;
             c = Cipher.getInstance("AES");

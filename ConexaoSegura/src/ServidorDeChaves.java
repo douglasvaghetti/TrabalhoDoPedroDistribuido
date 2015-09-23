@@ -23,34 +23,36 @@ public class ServidorDeChaves {
         
         System.out.println(descriptografada);
 */      
-        
-        
         chaves = new HashMap<>();
 
         chaves.put("192.168.1.61", "ChaveChaveALICE*".getBytes());
         chaves.put("192.168.1.58", "ChaveChaveBOBOB*".getBytes());
 
+        ServerSocket novaConexao;
+        try {
+            novaConexao = new ServerSocket(50668);
+        
         while (true) {
-            try {
-                ServerSocket novaConexao = new ServerSocket(50666);
+            
                 ConexaoObjeto conexao = new ConexaoObjeto(novaConexao.accept());
-
+                System.out.println("Recebeu comexao do cliente"+conexao.getIP());
                 String server01 = conexao.getIP();
                 String server02 = (String) conexao.recebeObjeto();
-                
+                System.out.println("Fulaniho "+server01);
+                System.out.println("Quer falar com "+server02);
+                System.out.println("Chave compartilhada criada");
                 byte[] chaveCompartilhada = Criptografia.nextSessionId().getBytes();
                 
                 conexao.enviaObjeto(Criptografia.criptografa(chaveCompartilhada,chaves.get(server01)));
+                System.out.println("envio chave 1");
                 conexao.enviaObjeto(Criptografia.criptografa(chaveCompartilhada,chaves.get(server02)));
-
+                System.out.println("Envio chave 2");
+            
+        }   
             } catch (IOException ex) {
                 Logger.getLogger(ServidorDeChaves.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ServidorDeChaves.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        }
-          
     }
-
 }
