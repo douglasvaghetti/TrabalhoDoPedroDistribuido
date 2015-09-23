@@ -6,6 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ConexaoSegura {
 
@@ -16,6 +17,7 @@ public class ConexaoSegura {
     private String keyParticular = "abcdefghijklmnop";
     
     public ConexaoSegura(Socket socket) throws IOException {
+        this.keyParticular = JOptionPane.showInputDialog("Informe sua chave particular");
         this.socket = socket;
         try {
             this.keyCompartilhada = Criptografia.descriptografa((byte[]) recebeKey(), keyParticular.getBytes());
@@ -27,6 +29,7 @@ public class ConexaoSegura {
     }
 
     public ConexaoSegura(String IP, int porta) throws IOException {
+        this.keyParticular = JOptionPane.showInputDialog("Informe sua chave particular");
         try {
             ConexaoObjeto pegaChave = new ConexaoObjeto("IpServidorKey", 50666);
             pegaChave.enviaObjeto(IP);

@@ -27,10 +27,8 @@ public class ServidorDeChaves {
         
         chaves = new HashMap<>();
 
-        chaves.put("ALICE", "ChaveChaveALICE*".getBytes());
-        chaves.put("BOBOB", "ChaveChaveBOBOB*".getBytes());
-        chaves.put("JOAOJ", "ChaveChaveJOAOJ*".getBytes());
-        chaves.put("MARIA", "ChaveChaveMARIA*".getBytes());
+        chaves.put("192.168.1.61", "ChaveChaveALICE*".getBytes());
+        chaves.put("192.168.1.58", "ChaveChaveBOBOB*".getBytes());
 
         while (true) {
             try {
