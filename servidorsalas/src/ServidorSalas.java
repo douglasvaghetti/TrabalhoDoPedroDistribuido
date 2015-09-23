@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.SocketImpl;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Scanner;

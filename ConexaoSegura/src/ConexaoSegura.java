@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -14,14 +15,14 @@ public class ConexaoSegura {
     private ObjectInputStream objInput = null;
     private ObjectOutputStream objOut = null;
     private byte keyCompartilhada[] = null;
-    private String keyParticular = "abcdefghijklmnop";
+    private String keyDistribuidorChaves = "abcdefghijklmnop";
     
     public ConexaoSegura(Socket socket) throws IOException {
         
-        this.keyParticular = JOptionPane.showInputDialog("Informe sua chave particular");
         this.socket = socket;
         try {
-            this.keyCompartilhada = Criptografia.descriptografa((byte[]) recebeKey(), keyParticular.getBytes());
+            this.keyCompartilhada = Criptografia.descriptografa(recebeKey(), keyDistribuidorChaves.getBytes());
+            System.out.println("Recebeu chave compartilhada com "+getIP()+"= "+Arrays.toString(keyCompartilhada));
         } catch (ClassNotFoundException ex) {
             System.out.println("Erro no recebimento da chave");
             Logger.getLogger(ConexaoSegura.class.getName()).log(Level.SEVERE, null, ex);
@@ -30,11 +31,11 @@ public class ConexaoSegura {
     }
 
     public ConexaoSegura(String IP, int porta) throws IOException {
-        this.keyParticular = JOptionPane.showInputDialog("Informe sua chave particular");
+        this.keyDistribuidorChaves = JOptionPane.showInputDialog("Informe sua chave de comunicação com o distribuidor de chaves");
         try {
             ConexaoObjeto pegaChave = new ConexaoObjeto("IpServidorKey", 50666);
             pegaChave.enviaObjeto(IP);
-            keyCompartilhada = Criptografia.descriptografa((byte[]) pegaChave.recebeObjeto(), keyParticular.getBytes());
+            keyCompartilhada = Criptografia.descriptografa((byte[]) pegaChave.recebeObjeto(), keyDistribuidorChaves.getBytes());
             socket = new Socket();
             socket.connect(new InetSocketAddress(IP, porta), 1000);
             enviaObjeto(pegaChave.recebeObjeto());
@@ -65,11 +66,11 @@ public class ConexaoSegura {
         }
         objOut.writeObject(o);
     }
-    private Object recebeKey() throws IOException, ClassNotFoundException {
+    private byte[] recebeKey() throws IOException, ClassNotFoundException {
         if(objInput == null){
             objInput = new ObjectInputStream(socket.getInputStream());            
         }
-        return objInput.readObject();
+        return (byte[]) objInput.readObject();
     }
     
     public String recebe() throws IOException, ClassNotFoundException {

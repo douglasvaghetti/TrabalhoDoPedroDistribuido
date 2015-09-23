@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,8 +26,8 @@ public class ServidorDeChaves {
 */      
         chaves = new HashMap<>();
 
-        chaves.put("192.168.1.61", "ChaveChaveALICE*".getBytes());
-        chaves.put("192.168.1.58", "ChaveChaveBOBOB*".getBytes());
+        chaves.put("192.168.1.61", "ChaveChaveChave*".getBytes());
+        chaves.put("192.168.1.58", "ChaveChaveChave*".getBytes());
 
         ServerSocket novaConexao;
         try {
@@ -41,7 +42,10 @@ public class ServidorDeChaves {
                 System.out.println("Fulaniho "+server01);
                 System.out.println("Quer falar com "+server02);
                 System.out.println("Chave compartilhada criada");
-                byte[] chaveCompartilhada = Criptografia.nextSessionId().getBytes();
+                String strChaveCompartilhada = Criptografia.nextSessionId();
+                byte[] chaveCompartilhada = strChaveCompartilhada.getBytes();
+                System.out.println("str chave compartilhada = "+Arrays.toString(strChaveCompartilhada.getBytes()));
+                
                 
                 conexao.enviaObjeto(Criptografia.criptografa(chaveCompartilhada,chaves.get(server01)));
                 System.out.println("envio chave 1");
