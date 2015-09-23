@@ -37,11 +37,9 @@ public class ServidorDeChaves {
                 ServerSocket novaConexao = new ServerSocket(50666);
                 ConexaoObjeto conexao = new ConexaoObjeto(novaConexao.accept());
 
-                String msg = (String) conexao.recebeObjeto();
-
-                String server01 = msg.split(":")[0];
-                String server02 = msg.split(":")[1];
-
+                String server01 = conexao.getIP();
+                String server02 = (String) conexao.recebeObjeto();
+                
                 byte[] chaveCompartilhada = Criptografia.nextSessionId().getBytes();
                 
                 conexao.enviaObjeto(Criptografia.criptografa(chaveCompartilhada,chaves.get(server01)));
