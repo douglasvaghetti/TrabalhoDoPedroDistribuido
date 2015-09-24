@@ -31,7 +31,7 @@ public class ClienteMiddleware {
         for (String ip : ipsServidoresSalas) {
             Conexao conexao;
             try {
-                System.out.println("Ok, contatando o servidor");
+                System.out.println("Ok, contatando o servidor "+ip);
                 conexao = new Conexao(ip, PORTASERVIDORSALAS);
             } catch (IOException e) {
                 System.out.println("ip " + ip + " nao está conectado ou não é o lider, tentando o proximo");
@@ -43,10 +43,12 @@ public class ClienteMiddleware {
                 conexao.envia(senha);
                 String resposta = conexao.recebe();
                 if (resposta.equals("autenticadoComum")) {
+                    System.out.println("autenticou cliente "+login+" como comum");
                     conectado = conexao;
                     return true;
                 } else {
                     if (resposta.equals("autenticadoGold")) {
+                        System.out.println("autenticou cliente "+login+" como gold");
                         conectado = conexao;
                         tipoUsuario = "gold";
                         return true;

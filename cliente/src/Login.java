@@ -88,7 +88,7 @@ public class Login extends javax.swing.JFrame {
 
     private void BotaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoLoginActionPerformed
         String senha = ClienteMiddleware.toMD5(new String(TextoSenha.getPassword()));
-        if(ClienteMiddleware.autentica(TextoUsuario.getText(), null)){
+        if(ClienteMiddleware.autentica(TextoUsuario.getText(), senha)){
             this.setVisible(false);
             if(ClienteMiddleware.tipoUsuario.equals("comum")){
                 new SeletorPartidaComum().setVisible(true);

@@ -19,6 +19,8 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
 
                 String login = novaConexao.recebe();
                 String senha = novaConexao.recebe();
+                
+                System.out.println("recebeu o login "+login+"e a senha "+senha);
 
                 Jogador autenticado = null;
                 synchronized (ServidorSalas.mutexJogadores) {
