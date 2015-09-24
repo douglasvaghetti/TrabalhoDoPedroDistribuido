@@ -35,6 +35,7 @@ public class ClienteMiddleware {
                 conexao = new Conexao(ip, PORTASERVIDORSALAS);
             } catch (IOException e) {
                 System.out.println("ip " + ip + " nao está conectado ou não é o lider, tentando o proximo");
+                e.printStackTrace();
                 continue;
             }
 
@@ -42,6 +43,7 @@ public class ClienteMiddleware {
                 conexao.envia(login);
                 conexao.envia(senha);
                 String resposta = conexao.recebe();
+                System.out.println(">>>recebeu "+resposta);
                 if (resposta.equals("autenticadoComum")) {
                     System.out.println("autenticou cliente "+login+" como comum");
                     conectado = conexao;

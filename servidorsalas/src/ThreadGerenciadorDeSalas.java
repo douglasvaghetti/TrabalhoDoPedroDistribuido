@@ -33,10 +33,12 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
                 }
                 if (autenticado == null) {
                     novaConexao.envia("falhaDeAutenticacao");
+                    System.out.println("mandou falha de autenticacao");
                     novaConexao.close();
                     continue;
                 } else {
                     novaConexao.envia(autenticado.gold ? "autenticadoGold" : "autenticadoComum");
+                    System.out.println("mandou autenticacao bem sucedida");
                 }
                 String personagem = novaConexao.recebe();
                 //falta confirma a entrada do jogador na sala.
