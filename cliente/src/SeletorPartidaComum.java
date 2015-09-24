@@ -84,8 +84,8 @@ public class SeletorPartidaComum extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        System.out.println("personagem selecionado = "+personagem1.Personagens.getSelection().getActionCommand().toLowerCase());
-        ClienteMiddleware.esperaPartida(2,personagem1.Personagens.getSelection().getActionCommand().toLowerCase());
+        System.out.println("personagem selecionado = "+personagem1.selecionado);
+        ClienteMiddleware.esperaPartida(2,personagem1.selecionado);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
