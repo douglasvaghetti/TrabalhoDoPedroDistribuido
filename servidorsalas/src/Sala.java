@@ -17,7 +17,7 @@ public class Sala {
         this.jogadores.add(jogador);
         if(jogadores.size()==servidorAlvo.clientesPorSala){
             if(validaJogadoresAntesDeEnviar()){
-                System.out.println("todos jogadores da sala estão ok. Mandando array de jogadores ");
+                System.out.println("todos jogadores da sala estao ok. Mandando array de jogadores ");
                 enviaParaServidor();
             }else{
                 System.out.println("Chegou no tamanho final da sala mas haviam "
@@ -46,7 +46,7 @@ public class Sala {
                 }
                 
             }catch(IOException e){
-                System.out.println("o jogador "+j.IP+"não parece estar mais conectado, sala continua na fila");
+                System.out.println("o jogador "+j.IP+"nao parece estar mais conectado, sala continua na fila");
                 filaDaMorte.add(j);
                 valido = false;
             }

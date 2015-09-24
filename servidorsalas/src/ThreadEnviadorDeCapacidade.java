@@ -20,7 +20,7 @@ public class ThreadEnviadorDeCapacidade extends Thread{
                 novaConexao.envia(ServidorSalas.forca);
                 System.out.println("enviou o peso "+ServidorSalas.forca);
             } catch (IOException ex) {
-                System.out.println("voce pode me obrigar a usar  try catch mas não a fase algo nele.");
+                System.out.println("voce pode me obrigar a usar  try catch mas nao a fase algo nele.");
             }
         }
     }

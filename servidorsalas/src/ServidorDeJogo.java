@@ -21,7 +21,7 @@ public class ServidorDeJogo implements Serializable{
 
         } catch (IOException ex) {
             System.out.println("erro na conexao para atualizar dados do servidor "+IP);
-            //TRATAMENTO DE EXCESSÃO NECESSARIO AQUI
+            //TRATAMENTO DE EXCESSaO NECESSARIO AQUI
             ex.printStackTrace();
         }
     }

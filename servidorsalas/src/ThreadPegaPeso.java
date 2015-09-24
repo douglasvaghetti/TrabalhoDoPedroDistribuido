@@ -31,7 +31,7 @@ public class ThreadPegaPeso extends Thread {
             System.out.println("peso obtido de "+ip+" = "+cap);
             ServidorSalas.vizinhos.get(vizinho).forca = cap;
         } catch (IOException ex) {
-            System.out.println("deu merda, peso não pode ser obtido");
+            System.out.println("deu merda, peso nao pode ser obtido");
             ServidorSalas.vizinhos.get(vizinho).forca = -1;
         }
     }
