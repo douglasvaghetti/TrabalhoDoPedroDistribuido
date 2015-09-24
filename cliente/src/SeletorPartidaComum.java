@@ -1,3 +1,6 @@
+
+import javax.swing.JRadioButton;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -39,6 +42,11 @@ public class SeletorPartidaComum extends javax.swing.JFrame {
         jButton2.setText("3 Jogadores");
 
         jButton3.setText("2 Jogadores");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,6 +82,12 @@ public class SeletorPartidaComum extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        System.out.println(personagem1.Personagens.getSelection().getActionCommand());
+        ClienteMiddleware.esperaPartida(2,personagem1.Personagens.getSelection().getActionCommand());
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

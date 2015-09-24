@@ -67,7 +67,7 @@ public class Sala {
         }
         
         try {
-            System.out.println("enviand o pacote de jogadores "+mensagem+" para "+servidorAlvo.IP);
+            System.out.println("enviando o pacote de jogadores "+mensagem+" para "+servidorAlvo.IP);
             Conexao conexao = new Conexao(servidorAlvo.IP,ServidorSalas.PORTAMANDAPACOTEJOGADORESSALA);
             conexao.envia(mensagem);
             conexao.close();

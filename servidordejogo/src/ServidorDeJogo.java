@@ -10,10 +10,10 @@ public class ServidorDeJogo {
     public static int PORTAATUALIZACARGA = 50021;
     public static String IPSERVIDORSALAS;
     public static ArrayList<ThreadSalaDeJogo> salasDeJogo ;
-    
+    public static int qtdJogadoresPorPartida;
+    public static int qtdSalas;
+        
     public static void main(String[] args) throws IOException{
-        int qtdJogadoresPorPartida;
-        int qtdSalas;
         
         salasDeJogo = new ArrayList<>();
         new ThreadRespondeCargaAtual().start();

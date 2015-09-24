@@ -40,7 +40,6 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
                     novaConexao.envia(autenticado.gold ? "autenticadoGold" : "autenticadoComum");
                     System.out.println("mandou autenticacao bem sucedida");
                 }
-                String personagem = novaConexao.recebe();
                 //falta confirma a entrada do jogador na sala.
                 int qtdPessoasPorSala = Integer.parseInt(novaConexao.recebe());
                 System.out.println("recebeu mensage de pedido de jogo do jogador" + autenticado.IP);

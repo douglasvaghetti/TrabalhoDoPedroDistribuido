@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 public class ThreadRecebedorDeSalas extends Thread{
     public static final int PORTACONECTACLIENTE = 50003;
     public static final int PORTARECEBESALA = 50020;
+  
+
+    
     
     
     ServerSocket recebedorDeConexoes;
@@ -23,15 +26,21 @@ public class ThreadRecebedorDeSalas extends Thread{
 
                 BufferedReader input = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
                 String dadosSala = input.readLine();
-                System.out.println("recebeu dados da sala "+dadosSala);
+                for(String ip: dadosSala.split(";")){
+                    Socket s = new Socket(ip,50050);  //só conecta e espera pegarem o ip
+                    Thread.sleep(100);
+                    s.close();
+                }
                 
-                ThreadSalaDeJogo temp = new ThreadSalaDeJogo(dadosSala);
+                ThreadSalaDeJogo temp = new ThreadSalaDeJogo();
                 ServidorDeJogo.salasDeJogo.add(temp);
                 temp.start();
                 
                 conexao.close();
             }
         } catch (IOException ex) {
+            Logger.getLogger(ThreadRecebedorDeSalas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(ThreadRecebedorDeSalas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

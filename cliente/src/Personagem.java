@@ -40,7 +40,7 @@ public class Personagem extends javax.swing.JPanel {
         jRadioButton1.setText("Bauru");
 
         Personagens.add(jRadioButton9);
-        jRadioButton9.setText("Zé");
+        jRadioButton9.setText("Ze");
 
         Personagens.add(jRadioButton7);
         jRadioButton7.setText("Vagner");
@@ -105,7 +105,7 @@ public class Personagem extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup Personagens;
+    public javax.swing.ButtonGroup Personagens;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;

@@ -101,7 +101,7 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
         if(Arrays.equals(repeteSenha.getPassword(), senha.getPassword())){
-            if(ClienteMiddleware.cadastrar(textoLogin.getText(), new String(senha.getPassword()), (gold.isSelected() ? "gold": ""))){
+            if(ClienteMiddleware.cadastrar(textoLogin.getText(), ClienteMiddleware.toMD5(new String(senha.getPassword())), (gold.isSelected() ? "gold": ""))){
                 this.setVisible(false);
                 new Login().setVisible(true);
                 JOptionPane.showMessageDialog(null, "Cadastro efetuado, agora vamos ao jogo!");

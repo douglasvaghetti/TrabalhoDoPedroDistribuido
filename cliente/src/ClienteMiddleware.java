@@ -1,4 +1,5 @@
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.ServerSocket;
@@ -104,8 +105,6 @@ public class ClienteMiddleware {
     public static void esperaPartida(int numeroJogadores, String personagem){
         if(conectado != null){
             try {
-                
-                conectado.envia(personagem);
                 conectado.envia(numeroJogadores);
                 
                 //resposta da ThreadGerenciadorDeSalas
@@ -114,7 +113,13 @@ public class ClienteMiddleware {
                 
                 ServerSocket esperaPartida = new ServerSocket(50050);
                 Conexao conexao = new Conexao(esperaPartida.accept());
-                String servidor = conexao.recebe();
+                String ipDoServidor = conexao.getIP();
+                conexao.close();
+                
+                String pastaAtual = System.getProperty("user.dir");
+                Runtime r = Runtime.getRuntime();
+                Process p = r.exec("love "+pastaAtual+"/c3fighter "+ipDoServidor+" "+personagem);
+                
                 //Aqui conecta no servidor de jogo (chama o lua);
             } catch (IOException ex) {
                 Logger.getLogger(ClienteMiddleware.class.getName()).log(Level.SEVERE, null, ex);

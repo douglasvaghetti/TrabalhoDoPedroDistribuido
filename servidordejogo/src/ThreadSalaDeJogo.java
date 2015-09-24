@@ -1,26 +1,22 @@
 
+import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ThreadSalaDeJogo extends Thread{
-    String listaIps;
-
-    public ThreadSalaDeJogo(String listaIps) {
-        this.listaIps = listaIps;
-    }
 
     @Override
     public void run() {
-        System.out.println("sou a thread de jogo, eu que vou abrir conexoes "
-                + "com esses ips:"+listaIps);
-        
+        String pastaAtual = System.getProperty("user.dir");
+        Runtime r = Runtime.getRuntime();
         try {
-            long tempo = 20000+(new Random().nextInt(20000));
-            System.out.println("esse jogo vai durar "+tempo/1000+" segundos");
-            sleep(tempo);
-        } catch (InterruptedException ex) {
-            System.out.println("erro no sleep da simulação do jogo.");
+            Process p = r.exec("love "+pastaAtual+"/c3fighter/servidor "+ServidorDeJogo.qtdJogadoresPorPartida);
+        } catch (IOException ex) {
+            Logger.getLogger(ThreadSalaDeJogo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("sala de jogo com os ips "+listaIps+" terminou");
+        
+        System.out.println("sala de jogo terminou");
         ServidorDeJogo.salasDeJogo.remove(this);
     }
     
