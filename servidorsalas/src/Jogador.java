@@ -1,4 +1,7 @@
-public class Jogador {
+
+import java.io.Serializable;
+
+public class Jogador implements Serializable{
 
     public String login, senha;
     public boolean estaLogado;
