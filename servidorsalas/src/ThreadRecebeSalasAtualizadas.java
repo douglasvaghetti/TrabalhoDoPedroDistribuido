@@ -18,7 +18,7 @@ public class ThreadRecebeSalasAtualizadas  extends Thread{
                 conexao.close();
             }
         } catch (IOException ex) {
-            System.out.println("erro na conexao para sincronização das salas");
+            System.out.println("erro na conexao para sincronizacao das salas");
         } catch (ClassNotFoundException ex) {
             System.out.println("recebeu uma variavel de classe desconhecida do "
                     + "recebeObjeto no recebedor de salas atualizadas");

@@ -17,7 +17,7 @@ class ThreadRecebeServidoresDeJogoAtualizados extends Thread{
                 conexao.close();
             }
         } catch (IOException ex) {
-            System.out.println("erro na conexao para sincronização dos servidores de jogo");
+            System.out.println("erro na conexao para sincronizcao dos servidores de jogo");
         } catch (ClassNotFoundException ex) {
             System.out.println("recebeu uma variavel de classe desconhecida do "
                     + "recebeObjeto no recebedor de servidores de jogo");

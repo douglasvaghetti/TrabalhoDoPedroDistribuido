@@ -4,7 +4,7 @@ import java.net.ServerSocket;
 
 //PROTOCOLO DE COMUNICACAO
 //CLIENTE: "querojogar:NumeroDePessoasNaSala"
-//SERVIDOR: "xxx.xxx.xxx.xxx" que é o ip, se tiver  ou "naoDeuLesk" caso nao tenha nenhum servidor desse tipo de jogo
+//SERVIDOR: "xxx.xxx.xxx.xxx" que eh o ip, se tiver  ou "naoDeuLesk" caso nao tenha nenhum servidor desse tipo de jogo
 public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
 
     ServerSocket recebedorDeClientes;
