@@ -26,12 +26,12 @@ public class ServidorDeChaves {
 */      
         chaves = new HashMap<>();
 
-        chaves.put("192.168.1.61", "ChaveChaveChave*".getBytes());
-        chaves.put("192.168.1.58", "ChaveChaveChave*".getBytes());
+        chaves.put("192.168.1.12", "ChaveChaveChave*".getBytes());
+        chaves.put("192.168.1.11", "ChaveChaveChave*".getBytes());
 
         ServerSocket novaConexao;
         try {
-            novaConexao = new ServerSocket(50668);
+            novaConexao = new ServerSocket(50666);
         
         while (true) {
             
@@ -42,7 +42,7 @@ public class ServidorDeChaves {
                 System.out.println("Fulaniho "+server01);
                 System.out.println("Quer falar com "+server02);
                 System.out.println("Chave compartilhada criada");
-                String strChaveCompartilhada = Criptografia.nextSessionId();
+                String strChaveCompartilhada = "ABCDEFGHJKLMNOPR";//Criptografia.nextSessionId();
                 byte[] chaveCompartilhada = strChaveCompartilhada.getBytes();
                 System.out.println("str chave compartilhada = "+Arrays.toString(strChaveCompartilhada.getBytes()));
                 

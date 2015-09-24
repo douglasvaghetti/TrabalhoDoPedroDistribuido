@@ -60,7 +60,7 @@ public class ServidorSalas {
         
         if(vizinhos.size()>0){
             System.out.println(">>>>aperte enter depois que todos servidores de salas "
-                    + "estiverem abertos para inciar a eleição.");
+                    + "estiverem abertos para inciar a eleicao.");
             new Scanner(System.in).nextLine();
             getVizinhos();
             System.out.println("obteve pesos de todos vizinhos");
@@ -68,7 +68,7 @@ public class ServidorSalas {
             System.out.println("");
         }
         
-        System.out.println("verificando se é lider");
+        System.out.println("verificando se eh lider");
         ehLider = verificaSeEhLider();
         
         if(ehLider){
@@ -114,7 +114,7 @@ public class ServidorSalas {
                     return false;
                 } catch (IOException ex) {
                     System.out.println("tentou criar conexao com "+vizinho.IP+""
-                            + "para avisar que é lider mas estava morta");
+                            + "para avisar que eh lider mas estava morta");
                 }
             }
         }
@@ -132,7 +132,7 @@ public class ServidorSalas {
                 //TODO: ARRUAMR ISSO, NAO FUNCIONA EM QUALQUER OS
                 conexao.close();
             } catch (IOException ex) {
-                 System.out.println("print tentou avisar para replica   "+vizinho.IP+" que é lider mas replica nao esta viva");
+                 System.out.println("print tentou avisar para replica   "+vizinho.IP+" que eh lider mas replica nao esta viva");
             }
         }
     }

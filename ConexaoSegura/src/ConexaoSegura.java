@@ -15,7 +15,7 @@ public class ConexaoSegura {
     private ObjectInputStream objInput = null;
     private ObjectOutputStream objOut = null;
     private byte keyCompartilhada[] = null;
-    private String keyDistribuidorChaves = "abcdefghijklmnop";
+    private String keyDistribuidorChaves="ChaveChaveChave*"; ;
     
     public ConexaoSegura(Socket socket) throws IOException {
         
@@ -31,9 +31,9 @@ public class ConexaoSegura {
     }
 
     public ConexaoSegura(String IP, int porta) throws IOException {
-        this.keyDistribuidorChaves = JOptionPane.showInputDialog("Informe sua chave de comunicação com o distribuidor de chaves");
+        
         try {
-            ConexaoObjeto pegaChave = new ConexaoObjeto("IpServidorKey", 50666);
+            ConexaoObjeto pegaChave = new ConexaoObjeto("192.168.1.8", 50666);
             pegaChave.enviaObjeto(IP);
             keyCompartilhada = Criptografia.descriptografa((byte[]) pegaChave.recebeObjeto(), keyDistribuidorChaves.getBytes());
             socket = new Socket();
