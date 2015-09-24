@@ -28,6 +28,10 @@ public class Sala {
     public int getQtdJogadoresSala(){
         return servidorAlvo.clientesPorSala;
     }
+    
+    public int getJogadoresAtuais(){
+        return jogadores.size();
+    }
 
     
     private void enviaParaServidor(){

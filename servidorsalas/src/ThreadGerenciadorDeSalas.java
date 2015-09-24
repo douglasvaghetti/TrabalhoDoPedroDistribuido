@@ -91,8 +91,11 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
     }
 
     private Sala retornaSalaDesseTamanho(int qtdJogadoresPorSala) {
+        System.out.println("procurando  sala de tamanho "+qtdJogadoresPorSala);
         synchronized (ServidorSalas.mutexSalasEmMontagem) {
+            
             for (Sala s : ServidorSalas.salasEmMontagem) {
+                System.out.println("sala com tamanho "+s.getQtdJogadoresSala()+" com "+s.getJogadoresAtuais());
                 if (s.getQtdJogadoresSala() == qtdJogadoresPorSala) {
                     return s;
                 }
