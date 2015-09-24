@@ -149,7 +149,7 @@ public class ServidorSalas {
     public static void iniciaThreadsLider(){
         System.out.println("iniciando threads de lider");
         limpaThreads();
-        threadsVivas = new ThreadLimpavel[2];
+        threadsVivas = new ThreadLimpavel[3];
         try {
             IPLiderAtual = InetAddress.getLocalHost().toString().replaceAll("/","");  //getlocalhost bota uma barra no inicio por padrao
             avisaOutrosQueEhLider();

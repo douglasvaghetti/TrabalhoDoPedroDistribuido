@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 public class ClienteMiddleware {
 
-    private static String[] ipsServidoresSalas = {"192.168.0.34"};
+    private static String[] ipsServidoresSalas = {"192.168.1.16","192.168.1.17"};
     private static final int PORTASERVIDORSALAS = 50001;
     private static final int PORTASERVIDORCADASTRO = 50002;
     public final int PORTASERVIDORJOGO = 50003;
@@ -77,6 +77,7 @@ public class ClienteMiddleware {
                 conexao.close();
             } catch (IOException e) {
                 System.out.println("ip " + ip + " nao está conectado ou não é o lider, tentando o proximo");
+                e.printStackTrace();
                 continue;
             }
         }
