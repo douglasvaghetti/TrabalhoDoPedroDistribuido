@@ -29,6 +29,7 @@ public class ThreadRegistradorRecursos extends Thread {
                 synchronized(ServidorSalas.mutexServidoresDeJogo){
                     ServidorSalas.servidoresDeJogo.add(new ServidorDeJogo(qtdJogadoresPorSala, qtdMaximaDeSalas, IPDoServidorDeJogo));
                 }
+                SincronizacaoReplicas.sincronizaServidoresDeJogo();
                 novaConexao.close();
                 
             }

@@ -33,6 +33,7 @@ public class ThreadGerenciadorDeCadastro extends ThreadLimpavel{
                         }
                     synchronized(ServidorSalas.mutexJogadores){
                         ServidorSalas.jogadores.add(novo);
+                        System.out.println("cadastrou o jogador "+novo.login+"com o ip "+novo.IP);
                         SincronizacaoReplicas.sincronizaJogadores();
                         
                         novaConexao.envia("cadastroEfetuado");
