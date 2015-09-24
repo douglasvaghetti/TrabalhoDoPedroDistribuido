@@ -50,6 +50,7 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
                     novaConexao.close();
                     Sala salaEncontrada = retornaSalaDesseTamanho(qtdPessoasPorSala);
                     if (salaEncontrada == null) {
+                        System.out.println("nao encontrou uma sala de tamanho "+qtdPessoasPorSala+" criou uma nova");
                         salaEncontrada = criaSala(qtdPessoasPorSala);
                     }
                     salaEncontrada.adicionaJogador(autenticado);

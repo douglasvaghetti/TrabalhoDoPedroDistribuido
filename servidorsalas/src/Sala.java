@@ -16,13 +16,10 @@ public class Sala {
     public void adicionaJogador(Jogador jogador){
         this.jogadores.add(jogador);
         if(jogadores.size()==servidorAlvo.clientesPorSala){
-            if(validaJogadoresAntesDeEnviar()){
-                System.out.println("todos jogadores da sala estao ok. Mandando array de jogadores ");
-                enviaParaServidor();
-            }else{
-                System.out.println("Chegou no tamanho final da sala mas haviam "
-                        + "jogadores desconectados que foram removidos");
-            }
+            
+            System.out.println("todos jogadores da sala estao ok. Mandando array de jogadores ");
+            enviaParaServidor();
+            
         }else{
             System.out.println("adicionou jogador na sala,"+jogadores.size()+" de "+servidorAlvo.clientesPorSala);
         }
@@ -31,33 +28,7 @@ public class Sala {
     public int getQtdJogadoresSala(){
         return servidorAlvo.clientesPorSala;
     }
-    
-    private boolean validaJogadoresAntesDeEnviar(){
-        Conexao conexao = null;
-        boolean valido = true;
-        ArrayList<Jogador> filaDaMorte = new ArrayList<>();
-        for(Jogador j : jogadores){
-            try{
-                conexao = new Conexao(j.IP, ServidorSalas.PORTACONECTACLIENTES);
-                conexao.envia("ta vivo champs?");
-                String recebido = conexao.recebe();
-                if(recebido.equals("sim")){
-                    conexao.close();
-                }
-                
-            }catch(IOException e){
-                System.out.println("o jogador "+j.IP+"nao parece estar mais conectado, sala continua na fila");
-                filaDaMorte.add(j);
-                valido = false;
-            }
-        }
-        
-        for(Jogador morto : filaDaMorte){ //nao pode remover dentro do for 
-            jogadores.remove(morto);
-            System.out.println("jogador "+morto.login+" removido da sala");
-        }
-        return valido;
-    }
+
     
     private void enviaParaServidor(){
         

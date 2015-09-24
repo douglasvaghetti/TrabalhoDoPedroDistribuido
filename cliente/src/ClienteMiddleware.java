@@ -114,6 +114,7 @@ public class ClienteMiddleware {
                 ServerSocket esperaPartida = new ServerSocket(50050);
                 Conexao conexao = new Conexao(esperaPartida.accept());
                 String ipDoServidor = conexao.getIP();
+                System.out.println("recebeu conexao do servidor de jogo. ip obtido = "+ipDoServidor);
                 conexao.close();
                 
                 String pastaAtual = System.getProperty("user.dir");
