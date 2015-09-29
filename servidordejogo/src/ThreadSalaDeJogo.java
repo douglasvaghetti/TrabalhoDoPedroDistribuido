@@ -11,6 +11,7 @@ public class ThreadSalaDeJogo extends Thread{
         String pastaAtual = System.getProperty("user.dir");
         Runtime r = Runtime.getRuntime();
         try {
+            System.out.println("love "+pastaAtual+"/c3fighter/servidor "+ServidorDeJogo.qtdJogadoresPorPartida);
             Process p = r.exec("love "+pastaAtual+"/c3fighter/servidor "+ServidorDeJogo.qtdJogadoresPorPartida);
         } catch (IOException ex) {
             Logger.getLogger(ThreadSalaDeJogo.class.getName()).log(Level.SEVERE, null, ex);
