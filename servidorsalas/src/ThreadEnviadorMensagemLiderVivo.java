@@ -33,7 +33,7 @@ public class ThreadEnviadorMensagemLiderVivo extends ThreadLimpavel {
                     InetAddress endereco = InetAddress.getByName(r.IP);
                     mensagem = new DatagramPacket(mensagemVivo,mensagemVivo.length,endereco,ServidorSalas.PORTAAVISOSVIVO);
                     conexao.send(mensagem);
-                    System.out.println("mandando mensagem de que estou vivo para "+r.IP);
+                    //System.out.println("mandando mensagem de que estou vivo para "+r.IP);
                 }
                 Thread.sleep(500);
             }

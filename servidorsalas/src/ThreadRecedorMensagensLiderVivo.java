@@ -7,16 +7,7 @@ import java.net.SocketTimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author aluno
- */
 public class ThreadRecedorMensagensLiderVivo extends ThreadLimpavel{
     DatagramSocket socket = null;
     @Override
@@ -35,7 +26,7 @@ public class ThreadRecedorMensagensLiderVivo extends ThreadLimpavel{
         
         while(!ServidorSalas.ehLider){
             try {
-                System.out.println("esperando mensagem de lider vivo");
+                
                 
                 
                 
@@ -61,9 +52,5 @@ public class ThreadRecedorMensagensLiderVivo extends ThreadLimpavel{
     public void limpa() {
         System.out.println("limpu socket recebedor mensagens lider vivo");
         socket.close();
-    }
-    
-    
-    
-    
+    }   
 }
