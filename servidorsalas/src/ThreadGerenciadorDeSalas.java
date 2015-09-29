@@ -54,6 +54,7 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
                         salaEncontrada = criaSala(qtdPessoasPorSala);
                     }
                     salaEncontrada.adicionaJogador(autenticado);
+                    
                     SincronizacaoReplicas.sincronizaSalas();
                 } else {
                     novaConexao.envia("naoDeuLesk");
@@ -86,7 +87,6 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
                 }
             }
             return false;
-
         }
     }
 
@@ -111,7 +111,10 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
                 melhorServidor = s;
             }
         }
-        return new Sala(melhorServidor);
+        Sala novaSala= new Sala(melhorServidor);
+        ServidorSalas.salasEmMontagem.add(novaSala);
+        System.out.println("criou uma nova sala com numero de jogadores "+novaSala.getQtdJogadoresSala());
+        return novaSala;
     }
 
 }
