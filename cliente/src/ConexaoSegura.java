@@ -53,11 +53,19 @@ public class ConexaoSegura {
         return socket.getInetAddress().toString().replace("/", "");
     }
 
-    public void envia(String o) throws IOException {
+    public void envia(String o)  {
         if (objOut == null) {
-            objOut = new ObjectOutputStream(socket.getOutputStream());
+            try {
+                objOut = new ObjectOutputStream(socket.getOutputStream());
+            } catch (IOException ex) {
+                Logger.getLogger(ConexaoSegura.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        objOut.writeObject(Criptografia.criptografa(o.getBytes(), keyCompartilhada));
+        try {
+            objOut.writeObject(Criptografia.criptografa(o.getBytes(), keyCompartilhada));
+        } catch (IOException ex) {
+            Logger.getLogger(ConexaoSegura.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void enviaObjeto(Object o) throws IOException {
@@ -73,10 +81,20 @@ public class ConexaoSegura {
         return (byte[]) objInput.readObject();
     }
     
-    public String recebe() throws IOException, ClassNotFoundException {
+    public String recebe(){
         if(objInput == null){
-            objInput = new ObjectInputStream(socket.getInputStream());            
+            
+            try {            
+                objInput = new ObjectInputStream(socket.getInputStream());
+            } catch (IOException ex) {
+                Logger.getLogger(ConexaoSegura.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        return new String(Criptografia.descriptografa((byte[]) objInput.readObject(), keyCompartilhada));
+        try {
+            return new String(Criptografia.descriptografa((byte[]) objInput.readObject(), keyCompartilhada));
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ConexaoSegura.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }

@@ -18,7 +18,7 @@ public class ClienteMiddleware {
     private static final int PORTASERVIDORCADASTRO = 50002;
     public final int PORTASERVIDORJOGO = 50003;
     public static String tipoUsuario = "comum";
-    private static Conexao conectado = null;
+    private static ConexaoSegura conectado = null;
 
     private Socket jogo;
 
@@ -30,10 +30,10 @@ public class ClienteMiddleware {
     public static boolean autentica(String login, String senha) {
 
         for (String ip : ipsServidoresSalas) {
-            Conexao conexao;
+            ConexaoSegura conexao;
             try {
                 System.out.println("Ok, contatando o servidor "+ip);
-                conexao = new Conexao(ip, PORTASERVIDORSALAS);
+                conexao = new ConexaoSegura(ip, PORTASERVIDORSALAS);
             } catch (IOException e) {
                 System.out.println("ip " + ip + " nao está conectado ou não é o lider, tentando o proximo");
                 e.printStackTrace();
@@ -71,7 +71,7 @@ public class ClienteMiddleware {
         for (String ip : ipsServidoresSalas) {
             try {
                 System.out.println("Ok, contatando o servidor");
-                Conexao conexao = new Conexao(ip, PORTASERVIDORCADASTRO);
+                ConexaoSegura conexao = new ConexaoSegura(ip, PORTASERVIDORCADASTRO);
                 conexao.envia(login);
                 conexao.envia(senha);
                 conexao.envia(gold);
@@ -105,7 +105,7 @@ public class ClienteMiddleware {
     public static void esperaPartida(int numeroJogadores, String personagem){
         if(conectado != null){
             try {
-                conectado.envia(numeroJogadores);
+                conectado.envia(numeroJogadores+"");
                 
                 //resposta da ThreadGerenciadorDeSalas
                 System.out.println("Resposta= "+conectado.recebe());

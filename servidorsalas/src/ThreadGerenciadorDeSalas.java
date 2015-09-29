@@ -15,7 +15,7 @@ public class ThreadGerenciadorDeSalas extends ThreadLimpavel {
         try {
             recebedorDeClientes = new ServerSocket(ServidorSalas.PORTACONECTACLIENTES);
             while (ServidorSalas.ehLider) {
-                Conexao novaConexao = new Conexao(recebedorDeClientes.accept());
+                ConexaoSegura novaConexao = new ConexaoSegura(recebedorDeClientes.accept());
 
                 String login = novaConexao.recebe();
                 String senha = novaConexao.recebe();

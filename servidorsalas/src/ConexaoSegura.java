@@ -73,10 +73,20 @@ public class ConexaoSegura {
         return (byte[]) objInput.readObject();
     }
     
-    public String recebe() throws IOException, ClassNotFoundException {
+    public String recebe(){
         if(objInput == null){
-            objInput = new ObjectInputStream(socket.getInputStream());            
+            
+            try {            
+                objInput = new ObjectInputStream(socket.getInputStream());
+            } catch (IOException ex) {
+                Logger.getLogger(ConexaoSegura.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        return new String(Criptografia.descriptografa((byte[]) objInput.readObject(), keyCompartilhada));
+        try {
+            return new String(Criptografia.descriptografa((byte[]) objInput.readObject(), keyCompartilhada));
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ConexaoSegura.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }
