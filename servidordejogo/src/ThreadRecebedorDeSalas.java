@@ -20,13 +20,16 @@ public class ThreadRecebedorDeSalas extends Thread{
         
             while(true){
                 Socket conexao = recebedorDeConexoes.accept();
+                BufferedReader input = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+                String dadosSala = input.readLine();
+                conexao.close();
                 
                 ThreadSalaDeJogo temp = new ThreadSalaDeJogo();
                 ServidorDeJogo.salasDeJogo.add(temp);
                 temp.start();
+                Thread.sleep(2000);
+                //da um tempo para o servidor abrir
                 
-                BufferedReader input = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
-                String dadosSala = input.readLine();
                 for(String ip: dadosSala.split(";")){
                     System.out.println("iniciand jogo no cliente "+ip);
                     Socket s = new Socket(ip,50050);  //só conecta e espera pegarem o ip
@@ -36,7 +39,7 @@ public class ThreadRecebedorDeSalas extends Thread{
                 
                 
                 
-                conexao.close();
+                
             }
         } catch (IOException ex) {
             Logger.getLogger(ThreadRecebedorDeSalas.class.getName()).log(Level.SEVERE, null, ex);
