@@ -1,10 +1,11 @@
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //PROTOCOLO ip1;ip2;ip3;ip4;etc
 
-public class Sala {
+public class Sala implements Serializable{
     private ArrayList<Jogador> jogadores;
     private ServidorDeJogo servidorAlvo;
 
