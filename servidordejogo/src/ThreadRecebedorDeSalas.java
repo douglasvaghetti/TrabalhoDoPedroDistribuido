@@ -28,6 +28,7 @@ public class ThreadRecebedorDeSalas extends Thread{
                 BufferedReader input = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
                 String dadosSala = input.readLine();
                 for(String ip: dadosSala.split(";")){
+                    System.out.println("iniciand jogo no cliente "+ip);
                     Socket s = new Socket(ip,50050);  //só conecta e espera pegarem o ip
                     Thread.sleep(100);
                     s.close();
