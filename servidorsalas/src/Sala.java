@@ -38,7 +38,7 @@ public class Sala implements Serializable{
     private void enviaParaServidor(){
         
         String mensagem = jogadores.get(0).IP;
-        for(int x=1;x>jogadores.size();x++){
+        for(int x=1;x<jogadores.size();x++){
             mensagem +=";"+jogadores.get(x).IP;
         }
         
