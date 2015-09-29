@@ -119,6 +119,7 @@ public class ClienteMiddleware {
                 
                 String pastaAtual = System.getProperty("user.dir");
                 Runtime r = Runtime.getRuntime();
+                System.out.println("abriu executavel do jogo");
                 Process p = r.exec("love "+pastaAtual+"/c3fighter "+ipDoServidor+" "+personagem);
                 
                 //Aqui conecta no servidor de jogo (chama o lua);

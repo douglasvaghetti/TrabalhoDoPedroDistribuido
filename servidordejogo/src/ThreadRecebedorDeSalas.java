@@ -10,9 +10,6 @@ public class ThreadRecebedorDeSalas extends Thread{
     public static final int PORTACONECTACLIENTE = 50003;
     public static final int PORTARECEBESALA = 50020;
   
-
-    
-    
     
     ServerSocket recebedorDeConexoes;
     @Override
@@ -23,7 +20,11 @@ public class ThreadRecebedorDeSalas extends Thread{
         
             while(true){
                 Socket conexao = recebedorDeConexoes.accept();
-
+                
+                ThreadSalaDeJogo temp = new ThreadSalaDeJogo();
+                ServidorDeJogo.salasDeJogo.add(temp);
+                temp.start();
+                
                 BufferedReader input = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
                 String dadosSala = input.readLine();
                 for(String ip: dadosSala.split(";")){
@@ -32,9 +33,7 @@ public class ThreadRecebedorDeSalas extends Thread{
                     s.close();
                 }
                 
-                ThreadSalaDeJogo temp = new ThreadSalaDeJogo();
-                ServidorDeJogo.salasDeJogo.add(temp);
-                temp.start();
+                
                 
                 conexao.close();
             }
