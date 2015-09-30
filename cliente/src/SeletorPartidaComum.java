@@ -93,7 +93,7 @@ public class SeletorPartidaComum extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             System.out.println("deu treta no sleep");
         }
-        ClienteMiddleware.esperaPartida(2,personagem1.selecionado);
+        ClienteMiddleware.esperaPartida(2,personagem1.selecionado,janelaEspera);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -106,7 +106,7 @@ public class SeletorPartidaGold extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             System.out.println("deu treta no sleep");
         }
-        ClienteMiddleware.esperaPartida(2,personagem1.selecionado);
+        ClienteMiddleware.esperaPartida(2,personagem1.selecionado,janelaEspera);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -124,7 +124,7 @@ public class SeletorPartidaGold extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             System.out.println("deu treta no sleep");
         }
-        ClienteMiddleware.esperaPartida(3,personagem1.selecionado);
+        ClienteMiddleware.esperaPartida(3,personagem1.selecionado,janelaEspera);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

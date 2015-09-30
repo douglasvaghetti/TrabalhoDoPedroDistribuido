@@ -103,7 +103,7 @@ public class ClienteMiddleware {
         return md5;
     }
     
-    public static void esperaPartida(int numeroJogadores, String personagem){
+    public static void esperaPartida(int numeroJogadores, String personagem, JFrame janelaInutil){
         if(conectado != null){
             try {
                 conectado.envia(numeroJogadores+"");
@@ -124,6 +124,8 @@ public class ClienteMiddleware {
                 System.out.println("abriu executavel do jogo");
                 System.out.println("love "+pastaAtual+"/c3fighter "+porta+" "+ipDoServidor+" "+personagem);
                 Process p = r.exec("love "+pastaAtual+"/c3fighter "+porta+" "+ipDoServidor+" "+personagem);
+                janelaInutil.setVisible(false);
+                System.exit(0);
             } catch (IOException ex) {
                 Logger.getLogger(ClienteMiddleware.class.getName()).log(Level.SEVERE, null, ex);
             }
