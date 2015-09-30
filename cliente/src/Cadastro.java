@@ -34,9 +34,9 @@ public class Cadastro extends javax.swing.JFrame {
 
         labelLogin.setText("Login");
 
-        textoLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textoLoginActionPerformed(evt);
+        textoLogin.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                textoLoginCaretUpdate(evt);
             }
         });
 
@@ -59,15 +59,15 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
-        senha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                senhaActionPerformed(evt);
+        senha.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                senhaCaretUpdate(evt);
             }
         });
 
-        repeteSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                repeteSenhaActionPerformed(evt);
+        repeteSenha.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                repeteSenhaCaretUpdate(evt);
             }
         });
 
@@ -136,29 +136,29 @@ public class Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_goldActionPerformed
 
-    private void textoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoLoginActionPerformed
+    private void repeteSenhaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_repeteSenhaCaretUpdate
         if(!"".equals(textoLogin.getText()) && senha.getPassword().length>0 && repeteSenha.getPassword().length>0){
             botaoCadastrar.setEnabled(true);
         }else{
             botaoCadastrar.setEnabled(false);
         }
-    }//GEN-LAST:event_textoLoginActionPerformed
+    }//GEN-LAST:event_repeteSenhaCaretUpdate
 
-    private void senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaActionPerformed
+    private void senhaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_senhaCaretUpdate
         if(!"".equals(textoLogin.getText()) && senha.getPassword().length>0 && repeteSenha.getPassword().length>0){
             botaoCadastrar.setEnabled(true);
         }else{
             botaoCadastrar.setEnabled(false);
         }
-    }//GEN-LAST:event_senhaActionPerformed
+    }//GEN-LAST:event_senhaCaretUpdate
 
-    private void repeteSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repeteSenhaActionPerformed
+    private void textoLoginCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_textoLoginCaretUpdate
         if(!"".equals(textoLogin.getText()) && senha.getPassword().length>0 && repeteSenha.getPassword().length>0){
             botaoCadastrar.setEnabled(true);
         }else{
             botaoCadastrar.setEnabled(false);
         }
-    }//GEN-LAST:event_repeteSenhaActionPerformed
+    }//GEN-LAST:event_textoLoginCaretUpdate
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCadastrar;
