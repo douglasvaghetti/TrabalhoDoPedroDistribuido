@@ -22,9 +22,10 @@ public class ClienteMiddleware {
 
     private Socket jogo;
 
-    public ClienteMiddleware() {
+    public ClienteMiddleware(String[] ipsServidoresSalas) {
         JFrame janela = new Login();
         janela.setVisible(true);
+        this.ipsServidoresSalas = ipsServidoresSalas;
     }
 
     public static boolean autentica(String login, String senha) {

@@ -9,13 +9,10 @@ public class Cliente{
             System.exit(0);
         }
         
-        System.out.println("recebeu args:");
-        String[] ipsServidoresSala;
-        for(String s : args){
-            System.out.println(s);
-        }
+        String[] ipsServidoresSala = args;
         
-        ClienteMiddleware c = new ClienteMiddleware();
+        
+        ClienteMiddleware c = new ClienteMiddleware(ipsServidoresSala);
             
     }
     
