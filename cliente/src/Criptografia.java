@@ -12,16 +12,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Douglas
- */
 public class Criptografia {
         
     private static SecureRandom random = new SecureRandom();
@@ -32,7 +22,7 @@ public class Criptografia {
             msn += "*";
         }
         */
-        System.out.println("Criptografando + "+Arrays.toString( msn));
+        //System.out.println("Criptografando + "+Arrays.toString( msn));
         try {
             Cipher c;
             c = Cipher.getInstance("AES");
@@ -48,8 +38,8 @@ public class Criptografia {
     }
     
     public static byte[]  descriptografa(byte[] msn, byte[] key) {
-        System.out.println("Descriptografando tamanho da menssagem = "+msn.length);
-        System.out.println("msg = "+Arrays.toString( msn));
+        //System.out.println("Descriptografando tamanho da menssagem = "+msn.length);
+        //System.out.println("msg = "+Arrays.toString( msn));
         try {
             Cipher c;
             c = Cipher.getInstance("AES");
