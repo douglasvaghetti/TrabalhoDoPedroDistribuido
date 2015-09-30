@@ -27,12 +27,8 @@ public class ThreadRecedorMensagensLiderVivo extends ThreadLimpavel{
         while(!ServidorSalas.ehLider){
             try {
                 
-                
-                
-                
                 DatagramPacket recebido = new DatagramPacket(buffer, 1024);
                 socket.receive(recebido);
-                System.out.println("recebeu o pacote "+recebido.toString());
                 
             } catch (SocketTimeoutException ex) {
                 System.out.println("ERRO, NAO RECEBEU HEARTBEAT DO LIDER");
