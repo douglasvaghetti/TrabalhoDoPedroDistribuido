@@ -35,6 +35,7 @@ public class ServidorDeChaves {
         chaves.put("192.168.1.19", "chavechavechavec".getBytes());
         chaves.put("192.168.1.20", "chavechavechavec".getBytes());
         chaves.put("192.168.1.21", "chavechavechavec".getBytes());
+        chaves.put("192.168.1.23", "chavechavechavec".getBytes());
         //chaves.put("172.16.50.200" , "chavechavechavec".getBytes());
 
         ServerSocket novaConexao;
