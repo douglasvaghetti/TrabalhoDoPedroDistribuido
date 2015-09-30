@@ -1,4 +1,5 @@
 
+import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 
 /*
@@ -85,6 +86,9 @@ public class SeletorPartidaComum extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.out.println("personagem selecionado = "+personagem1.selecionado);
+        this.setVisible(false);
+        JFrame janelaEspera = new JanelEsperandoJogo();
+        janelaEspera.setVisible(true);
         ClienteMiddleware.esperaPartida(2,personagem1.selecionado);
     }//GEN-LAST:event_jButton3ActionPerformed
 

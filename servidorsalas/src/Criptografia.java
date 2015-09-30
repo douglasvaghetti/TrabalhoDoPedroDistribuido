@@ -18,12 +18,6 @@ public class Criptografia {
     private static SecureRandom random = new SecureRandom();
     
     public static byte[] criptografa(byte[] msn, byte[] key) {
-        /*
-        while(msn.length() < 16 || msn.length()%16 != 0){
-            msn += "*";
-        }
-        */
-        //System.out.println("Criptografando + "+Arrays.toString( msn));
         try {
             Cipher c;
             c = Cipher.getInstance("AES");
@@ -55,7 +49,6 @@ public class Criptografia {
         
         
     }
-    
     
     public static String nextSessionId() {
         return new BigInteger(130, random).toString(16);

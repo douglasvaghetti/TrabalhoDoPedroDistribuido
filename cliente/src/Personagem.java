@@ -75,6 +75,7 @@ public class Personagem extends javax.swing.JPanel {
         });
 
         Personagens.add(jRadioButton5);
+        jRadioButton5.setSelected(true);
         jRadioButton5.setText("Pedro");
         jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

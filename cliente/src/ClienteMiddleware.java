@@ -107,7 +107,7 @@ public class ClienteMiddleware {
             try {
                 conectado.envia(numeroJogadores+"");
                 
-                //resposta da ThreadGerenciadorDeSalas
+                
                 System.out.println("Resposta= "+conectado.recebe());
                 conectado.close();
                 
