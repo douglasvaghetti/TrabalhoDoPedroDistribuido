@@ -37,6 +37,7 @@ local function recebeMensagem()
 			x, y = tonumber(x), tonumber(y)
 			objects[ent] = loadPlayer(x,y,nome)
 			print("tamaho = "..#objects.." ent = "..ent)
+			tempoFinal = 5
 		elseif cmd == 'derrotado' then
 			print("jogador ",ent," eliminado")
 			if objects[ent] then
@@ -45,6 +46,7 @@ local function recebeMensagem()
 			if ent==euMesmo then
 				ESTADO = "MORTO"
 			end
+			tempoFinal = 5
 		elseif cmd == 'vencedor' then
 			print("jogador ",ent," é o vencedor")
 			if ent==euMesmo then
@@ -68,18 +70,19 @@ function love.load(args)
 
 	udp = socket.udp()
 	udp:settimeout(0)
-	if #args ~=3 then
+	if #args ~=4 then
 		print("modo de uso: (na pasta do jogo) love . ipservidor professor")
 		love.event.quit()
 	end
-	local ip_servidor = args[2]
-	local professor = args[3]
+	local porta_servidor = tonumber(args[2])
+	local ip_servidor = args[3]
+	local professor = args[4]
 	if graficos[professor]==nil then
 		print("professor desconhecido")
 		love.event.quit()
 	end
 	print ("iniciando cliente, servidor =  ",ip_servidor, "professor = ",professor)
-	udp:setpeername(ip_servidor, 12345)
+	udp:setpeername(ip_servidor, porta_servidor)
 	math.randomseed(os.time())
 	euMesmo = tostring(math.random(99999))
 
@@ -144,6 +147,13 @@ function love.update(dt)
 			end
 		end
 	--end
+
+	if ESTADO == "MORTO" or ESTADO == "VENCEDOR" then
+		tempoFinal = tempoFinal-dt
+		if tempoFinal<0 then
+			love.event.quit()
+		end
+	end
 	local retorno
 	repeat
 		retorno = recebeMensagem()
