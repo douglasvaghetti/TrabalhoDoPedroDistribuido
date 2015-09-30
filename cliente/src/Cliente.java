@@ -10,7 +10,10 @@ public class Cliente{
         }
         
         String[] ipsServidoresSala = args;
-        
+        System.out.println("lista de ips dos servidores de sala:");
+        for(String ip : ipsServidoresSala){
+            System.out.println(ip);
+        }
         
         ClienteMiddleware c = new ClienteMiddleware(ipsServidoresSala);
             

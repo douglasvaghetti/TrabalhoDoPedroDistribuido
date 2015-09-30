@@ -25,7 +25,7 @@ public class ClienteMiddleware {
     public ClienteMiddleware(String[] ipsServidoresSalas) {
         JFrame janela = new Login();
         janela.setVisible(true);
-        this.ipsServidoresSalas = ipsServidoresSalas;
+        ClienteMiddleware.ipsServidoresSalas = ipsServidoresSalas;
     }
 
     public static boolean autentica(String login, String senha) {
@@ -71,7 +71,7 @@ public class ClienteMiddleware {
         System.out.println("tentando cadastrar o usuario "+login+" com a senha "+senha);
         for (String ip : ipsServidoresSalas) {
             try {
-                System.out.println("Ok, contatando o servidor");
+                System.out.println("Ok, contatando o servidor"+ip);
                 ConexaoSegura conexao = new ConexaoSegura(ip, PORTASERVIDORCADASTRO);
                 conexao.envia(login);
                 conexao.envia(senha);
@@ -83,7 +83,7 @@ public class ClienteMiddleware {
                 conexao.close();
             } catch (IOException e) {
                 System.out.println("ip " + ip + " nao está conectado ou não é o lider, tentando o proximo");
-                e.printStackTrace();
+                //e.printStackTrace();
                 continue;
             }
         }
