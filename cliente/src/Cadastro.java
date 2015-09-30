@@ -34,11 +34,18 @@ public class Cadastro extends javax.swing.JFrame {
 
         labelLogin.setText("Login");
 
+        textoLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textoLoginActionPerformed(evt);
+            }
+        });
+
         labelSenha.setText("Senha");
 
         labelRepeteSenha.setText("Repita a senha");
 
         botaoCadastrar.setText("Cadastrar");
+        botaoCadastrar.setEnabled(false);
         botaoCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCadastrarActionPerformed(evt);
@@ -116,6 +123,14 @@ public class Cadastro extends javax.swing.JFrame {
     private void goldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_goldActionPerformed
+
+    private void textoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoLoginActionPerformed
+        if(!"".equals(textoLogin.getText()) && senha.getPassword().length>0 && repeteSenha.getPassword().length>0){
+            botaoCadastrar.setEnabled(true);
+        }else{
+            botaoCadastrar.setEnabled(false);
+        }
+    }//GEN-LAST:event_textoLoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCadastrar;

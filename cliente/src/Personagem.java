@@ -10,7 +10,7 @@
  */
 public class Personagem extends javax.swing.JPanel {
 
-    public String selecionado = null;
+    public String selecionado = "pedro";
     public Personagem() {
         initComponents();
     }

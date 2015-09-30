@@ -36,7 +36,6 @@ public class ClienteMiddleware {
                 conexao = new ConexaoSegura(ip, PORTASERVIDORSALAS);
             } catch (IOException e) {
                 System.out.println("ip " + ip + " nao está conectado ou não é o lider, tentando o proximo");
-                e.printStackTrace();
                 continue;
             }
 
