@@ -59,6 +59,18 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
+        senha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                senhaActionPerformed(evt);
+            }
+        });
+
+        repeteSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                repeteSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,6 +143,22 @@ public class Cadastro extends javax.swing.JFrame {
             botaoCadastrar.setEnabled(false);
         }
     }//GEN-LAST:event_textoLoginActionPerformed
+
+    private void senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaActionPerformed
+        if(!"".equals(textoLogin.getText()) && senha.getPassword().length>0 && repeteSenha.getPassword().length>0){
+            botaoCadastrar.setEnabled(true);
+        }else{
+            botaoCadastrar.setEnabled(false);
+        }
+    }//GEN-LAST:event_senhaActionPerformed
+
+    private void repeteSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repeteSenhaActionPerformed
+        if(!"".equals(textoLogin.getText()) && senha.getPassword().length>0 && repeteSenha.getPassword().length>0){
+            botaoCadastrar.setEnabled(true);
+        }else{
+            botaoCadastrar.setEnabled(false);
+        }
+    }//GEN-LAST:event_repeteSenhaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCadastrar;
