@@ -87,6 +87,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textoLogin">
+      <Events>
+        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="textoLoginCaretUpdate"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelSenha">
       <Properties>
@@ -101,6 +104,7 @@
     <Component class="javax.swing.JButton" name="botaoCadastrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCadastrarActionPerformed"/>
@@ -115,8 +119,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="senha">
+      <Events>
+        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="senhaCaretUpdate"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="repeteSenha">
+      <Events>
+        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="repeteSenhaCaretUpdate"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

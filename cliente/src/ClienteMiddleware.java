@@ -68,6 +68,7 @@ public class ClienteMiddleware {
     }
 
     public static boolean cadastrar(String login, String senha, String gold) {
+        System.out.println("tentando cadastrar o usuario "+login+" com a senha "+senha);
         for (String ip : ipsServidoresSalas) {
             try {
                 System.out.println("Ok, contatando o servidor");
@@ -82,7 +83,7 @@ public class ClienteMiddleware {
                 conexao.close();
             } catch (IOException e) {
                 System.out.println("ip " + ip + " nao está conectado ou não é o lider, tentando o proximo");
-                //e.printStackTrace();
+                e.printStackTrace();
                 continue;
             }
         }
