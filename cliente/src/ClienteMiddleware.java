@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 public class ClienteMiddleware {
 
-    private static String[] ipsServidoresSalas = {"192.168.1.19","192.168.1.20"};
+    private static String[] ipsServidoresSalas = {"192.168.1.58","192.168.1.60"};
     private static final int PORTASERVIDORSALAS = 50001;
     private static final int PORTASERVIDORCADASTRO = 50002;
     public final int PORTASERVIDORJOGO = 50003;
