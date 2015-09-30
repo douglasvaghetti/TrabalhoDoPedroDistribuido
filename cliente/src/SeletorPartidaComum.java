@@ -1,4 +1,6 @@
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 
@@ -88,7 +90,17 @@ public class SeletorPartidaComum extends javax.swing.JFrame {
         System.out.println("personagem selecionado = "+personagem1.selecionado);
         this.setVisible(false);
         JFrame janelaEspera = new JanelEsperandoJogo();
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException ex) {
+            System.out.println("deu treta no sleep");
+        }
         janelaEspera.setVisible(true);
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException ex) {
+            System.out.println("deu treta no sleep");
+        }
         ClienteMiddleware.esperaPartida(2,personagem1.selecionado);
     }//GEN-LAST:event_jButton3ActionPerformed
 
