@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 public class ThreadRecebedorDeSalas extends Thread{
     public static final int PORTACONECTACLIENTE = 50003;
     public static final int PORTARECEBESALA = 50020;
+    private int porta = 50100;
   
     
     ServerSocket recebedorDeConexoes;
@@ -17,14 +18,13 @@ public class ThreadRecebedorDeSalas extends Thread{
         try {
             recebedorDeConexoes = new ServerSocket(PORTARECEBESALA);
             
-        
             while(true){
-                Socket conexao = recebedorDeConexoes.accept();
-                BufferedReader input = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
-                String dadosSala = input.readLine();
+                Conexao conexao = new Conexao(recebedorDeConexoes.accept());
+                String dadosSala = conexao.recebe();
                 conexao.close();
                 
-                ThreadSalaDeJogo temp = new ThreadSalaDeJogo();
+                ThreadSalaDeJogo temp = new ThreadSalaDeJogo(porta);
+                porta ++;
                 ServidorDeJogo.salasDeJogo.add(temp);
                 temp.start();
                 Thread.sleep(2000);
@@ -32,14 +32,11 @@ public class ThreadRecebedorDeSalas extends Thread{
                 
                 for(String ip: dadosSala.split(";")){
                     System.out.println("iniciand jogo no cliente "+ip);
-                    Socket s = new Socket(ip,50050);  //só conecta e espera pegarem o ip
-                    Thread.sleep(1000);
+                    Conexao s = new Conexao(ip,50050);  //só conecta e espera pegarem o ip
+                    s.envia(porta);
                     s.close();
+                    Thread.sleep(1000);
                 }
-                
-                
-                
-                
             }
         } catch (IOException ex) {
             Logger.getLogger(ThreadRecebedorDeSalas.class.getName()).log(Level.SEVERE, null, ex);

@@ -116,13 +116,14 @@ public class ClienteMiddleware {
                 Conexao conexao = new Conexao(esperaPartida.accept());
                 String ipDoServidor = conexao.getIP();
                 System.out.println("recebeu conexao do servidor de jogo. ip obtido = "+ipDoServidor);
+                int porta = Integer.parseInt(conexao.recebe());
                 conexao.close();
                 
                 String pastaAtual = System.getProperty("user.dir");
                 Runtime r = Runtime.getRuntime();
                 System.out.println("abriu executavel do jogo");
-                System.out.println("love "+pastaAtual+"/c3fighter "+ipDoServidor+" "+personagem);
-                Process p = r.exec("love "+pastaAtual+"/c3fighter "+ipDoServidor+" "+personagem);
+                System.out.println("love "+pastaAtual+"/c3fighter "+porta+" "+ipDoServidor+" "+personagem);
+                Process p = r.exec("love "+pastaAtual+"/c3fighter "+porta+" "+ipDoServidor+" "+personagem);
             } catch (IOException ex) {
                 Logger.getLogger(ClienteMiddleware.class.getName()).log(Level.SEVERE, null, ex);
             }
