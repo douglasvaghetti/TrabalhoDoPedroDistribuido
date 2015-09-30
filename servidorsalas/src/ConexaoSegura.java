@@ -15,7 +15,7 @@ public class ConexaoSegura {
     private ObjectInputStream objInput = null;
     private ObjectOutputStream objOut = null;
     private byte keyCompartilhada[] = null;
-    private String keyDistribuidorChaves="ChaveChaveChave*"; ;
+    private String keyDistribuidorChaves="chavechavechavec"; ;
     
     public ConexaoSegura(Socket socket) throws IOException {
         

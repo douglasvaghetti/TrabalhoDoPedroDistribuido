@@ -26,11 +26,11 @@ public class ServidorDeChaves {
 */      
         chaves = new HashMap<>();
 
-        chaves.put("192.168.1.18", "chavechavechavea".getBytes());
-        chaves.put("192.168.1.17", "chavechavechaveb".getBytes());
-        chaves.put("192.168.1.19", "chavechavechavec".getBytes());
-        chaves.put("192.168.1.12", "chavechavechaved".getBytes());
-        chaves.put("192.168.1.6" , "chavechavechavee".getBytes());
+        chaves.put("192.168.1.61", "chavechavechavec".getBytes());
+        chaves.put("192.168.1.60", "chavechavechavec".getBytes());
+        chaves.put("192.168.1.58", "chavechavechavec".getBytes());
+        chaves.put("192.168.1.12", "chavechavechavec".getBytes());
+        chaves.put("192.168.1.6" , "chavechavechavec".getBytes());
 
         ServerSocket novaConexao;
         try {
