@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 public class ClienteMiddleware {
 
-    private static String[] ipsServidoresSalas = {"172.16.50.102","172.16.50.103"};
+    private static String[] ipsServidoresSalas ;
     private static final int PORTASERVIDORSALAS = 50001;
     private static final int PORTASERVIDORCADASTRO = 50002;
     public final int PORTASERVIDORJOGO = 50003;
@@ -123,8 +123,6 @@ public class ClienteMiddleware {
                 System.out.println("abriu executavel do jogo");
                 System.out.println("love "+pastaAtual+"/c3fighter "+ipDoServidor+" "+personagem);
                 Process p = r.exec("love "+pastaAtual+"/c3fighter "+ipDoServidor+" "+personagem);
-                
-                //Aqui conecta no servidor de jogo (chama o lua);
             } catch (IOException ex) {
                 Logger.getLogger(ClienteMiddleware.class.getName()).log(Level.SEVERE, null, ex);
             }
