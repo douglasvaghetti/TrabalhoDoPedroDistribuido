@@ -93,7 +93,7 @@ public class Login extends javax.swing.JFrame {
             if(ClienteMiddleware.tipoUsuario.equals("comum")){
                 new SeletorPartidaComum().setVisible(true);
             }else{
-                new SeletorPartidaGold().setVisible(true);
+                new SeletorPartidaGold().setVisible(true); 
             }
         }else{
             msgErro.setText("Erro ao autenticar!");
