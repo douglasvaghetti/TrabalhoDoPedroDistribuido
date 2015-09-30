@@ -24,7 +24,6 @@ public class ThreadRecebedorDeSalas extends Thread{
                 conexao.close();
                 
                 ThreadSalaDeJogo temp = new ThreadSalaDeJogo(porta);
-                porta ++;
                 ServidorDeJogo.salasDeJogo.add(temp);
                 temp.start();
                 Thread.sleep(2000);
@@ -37,6 +36,7 @@ public class ThreadRecebedorDeSalas extends Thread{
                     s.close();
                     Thread.sleep(1000);
                 }
+                porta ++;
             }
         } catch (IOException ex) {
             Logger.getLogger(ThreadRecebedorDeSalas.class.getName()).log(Level.SEVERE, null, ex);
