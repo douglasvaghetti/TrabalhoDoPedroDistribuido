@@ -33,7 +33,7 @@ public class ConexaoSegura {
     public ConexaoSegura(String IP, int porta) throws IOException {
         
         try {
-            ConexaoObjeto pegaChave = new ConexaoObjeto("192.168.1.51", 50666);
+            ConexaoObjeto pegaChave = new ConexaoObjeto("172.16.50.105", 50666);
             pegaChave.enviaObjeto(IP);
             keyCompartilhada = Criptografia.descriptografa((byte[]) pegaChave.recebeObjeto(), keyDistribuidorChaves.getBytes());
             socket = new Socket();
