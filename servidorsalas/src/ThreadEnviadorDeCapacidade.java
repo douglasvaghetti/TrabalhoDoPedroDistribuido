@@ -17,6 +17,11 @@ public class ThreadEnviadorDeCapacidade extends Thread{
             try {
                 Conexao novaConexao = new Conexao(recebedorConexoes.accept());
                 System.out.println("abriu nova conexao com "+novaConexao.getIP());
+                if(ServidorSalas.ehLider){
+                    SincronizacaoReplicas.sincronizaJogadores();
+                    SincronizacaoReplicas.sincronizaSalas();
+                    SincronizacaoReplicas.sincronizaServidoresDeJogo();
+                }
                 novaConexao.envia(ServidorSalas.forca);
                 System.out.println("enviou o peso "+ServidorSalas.forca);
             } catch (IOException ex) {
