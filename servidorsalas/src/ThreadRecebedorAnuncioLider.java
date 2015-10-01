@@ -17,7 +17,7 @@ public class ThreadRecebedorAnuncioLider  extends Thread{
                 System.out.println("recebeu mensagem "+recebido+" no recebedor de anuncio de lider");
                 String novoIPLider = recebido.split(":")[1];
                 ServidorSalas.IPLiderAtual = novoIPLider;
-                System.out.println("atualizou lider para "+novoIPLider);
+                System.out.println(">>>>>>atualizou lider para "+novoIPLider);
                 if(ServidorSalas.ehLider){
                     ServidorSalas.inicioThreadsNaoLider();
                     SincronizacaoReplicas.sincronizaJogadores();

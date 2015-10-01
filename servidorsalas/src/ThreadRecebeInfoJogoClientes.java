@@ -6,11 +6,12 @@ import java.util.logging.Logger;
 
 
 public class ThreadRecebeInfoJogoClientes extends ThreadLimpavel{
-
+    ServerSocket recebedorDeConexoes;
+    
     @Override
     public void run() {
         try {
-            ServerSocket recebedorDeConexoes = new ServerSocket(ServidorSalas.PORTAINFOJOGOCLIENTE);
+            recebedorDeConexoes = new ServerSocket(ServidorSalas.PORTAINFOJOGOCLIENTE);
             while(true){
                 ConexaoSegura conexao = new ConexaoSegura(recebedorDeConexoes.accept());
                 
@@ -95,4 +96,13 @@ public class ThreadRecebeInfoJogoClientes extends ThreadLimpavel{
         return novaSala;
     }
     
+    @Override
+    public void limpa() {
+        try {
+            recebedorDeConexoes.close();
+            System.out.println("socket fechado");
+        } catch (IOException ex) {
+            System.out.println("erro no metodo limpa");
+        }
+    }
 }
