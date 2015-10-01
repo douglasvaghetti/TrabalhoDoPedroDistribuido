@@ -115,8 +115,14 @@ public class ClienteMiddleware {
                 conexaosalas.envia(senha);
                 
                 conexaosalas.envia(numeroJogadores + "");
-                System.out.println("Resposta= " + conexaosalas.recebe());
-                conexaosalas.close();
+                String resposta = conexaosalas.recebe();
+                System.out.println("Resposta= " + resposta);
+                if (resposta.equals("Voce nao esta logado. Sua secao pode ter expirado")){
+                    conexaosalas.close();
+                    janelaInutil.setVisible(false);
+                    new Login().setVisible(true);
+                }
+                
 
                 ServerSocket esperaPartida = new ServerSocket(50050);
                 Conexao conexao = new Conexao(esperaPartida.accept());

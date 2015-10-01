@@ -19,7 +19,7 @@ class ReplicaServidorSalas {
             conexaoAtualizaSalas.close();
         } catch (IOException ex) {
             System.out.println("erro na sincronizacao das salas da replica "+IP);
-            ex.printStackTrace();
+          //  ex.printStackTrace();
         }
             
     }
@@ -33,7 +33,7 @@ class ReplicaServidorSalas {
             conexaoAtualizaServidores.close();
         } catch (IOException ex) {
             System.out.println("erro na sincronizcao dos servidores de jogo da replica "+IP);
-            ex.printStackTrace();
+           // ex.printStackTrace();
         }
     }
     
@@ -46,7 +46,7 @@ class ReplicaServidorSalas {
             conexaoAtualizaServidores.close();
         } catch (IOException ex) {
             System.out.println("erro na sincronizcao dos servidores de jogo da replica "+IP);
-            ex.printStackTrace();
+           // ex.printStackTrace();
         }
     }
 }
