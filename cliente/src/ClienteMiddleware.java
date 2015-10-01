@@ -120,7 +120,15 @@ public class ClienteMiddleware {
                 if (resposta.equals("Voce nao esta logado. Sua secao pode ter expirado")){
                     conexaosalas.close();
                     janelaInutil.setVisible(false);
+                    JOptionPane.showMessageDialog(null, "Voce nao esta logado. Sua secao pode ter expirado","Erro!",JOptionPane.ERROR_MESSAGE);
                     new Login().setVisible(true);
+                }else{
+                    if(resposta.equals("naoDeuLesk")){
+                        conexaosalas.close();
+                        janelaInutil.setVisible(false);
+                        JOptionPane.showMessageDialog(null, "Não existe nenhum servidor de salas disponivel deste tamanho","Erro!",JOptionPane.ERROR_MESSAGE);
+                        new Login().setVisible(true);
+                    }
                 }
                 
 
