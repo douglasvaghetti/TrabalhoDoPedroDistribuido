@@ -16,6 +16,13 @@ public class ThreadRecebeJogadoresAtualizados  extends Thread{
                     ServidorSalas.jogadores = (ArrayList<Jogador>)conexao.recebeObjeto();
                 }
                 conexao.close();
+                if (ServidorSalas.ehLider){  //jogadores recebidos na primeiro sincronização apos virar lider precisam de timeout
+                    for(Jogador j : ServidorSalas.jogadores){
+                        if(j.estaLogado){
+                            new ThreadTimeoutLoginJogador(j).start();
+                        }
+                    }
+                }
             }
         } catch (IOException ex) {
             System.out.println("erro na conexao para sincronizcao das salas");

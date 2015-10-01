@@ -13,12 +13,13 @@ import javax.swing.JOptionPane;
 
 public class ClienteMiddleware {
 
-    private static String[] ipsServidoresSalas ;
+    private static String[] ipsServidoresSalas;
     private static final int PORTASERVIDORSALAS = 50001;
     private static final int PORTASERVIDORCADASTRO = 50002;
+    public static final int PORTAINFOJOGOCLIENTE = 50005;
+
     public final int PORTASERVIDORJOGO = 50003;
-    public static String tipoUsuario = "comum";
-    private static ConexaoSegura conectado = null;
+    public static String tipoUsuario = "comum", login, senha;
 
     private Socket jogo;
 
@@ -33,7 +34,7 @@ public class ClienteMiddleware {
         for (String ip : ipsServidoresSalas) {
             ConexaoSegura conexao;
             try {
-                System.out.println("Ok, contatando o servidor "+ip);
+                System.out.println("Ok, contatando o servidor " + ip);
                 conexao = new ConexaoSegura(ip, PORTASERVIDORSALAS);
             } catch (IOException e) {
                 System.out.println("ip " + ip + " nao está conectado ou não é o lider, tentando o proximo");
@@ -44,16 +45,20 @@ public class ClienteMiddleware {
                 conexao.envia(login);
                 conexao.envia(senha);
                 String resposta = conexao.recebe();
-                System.out.println(">>>recebeu "+resposta);
+                System.out.println(">>>recebeu " + resposta);
                 if (resposta.equals("autenticadoComum")) {
-                    System.out.println("autenticou cliente "+login+" como comum");
-                    conectado = conexao;
+                    System.out.println("autenticou cliente " + login + " como comum");
+                    conexao.close();
+                    ClienteMiddleware.login = login;
+                    ClienteMiddleware.senha = senha;
                     return true;
                 } else {
                     if (resposta.equals("autenticadoGold")) {
-                        System.out.println("autenticou cliente "+login+" como gold");
-                        conectado = conexao;
+                        System.out.println("autenticou cliente " + login + " como gold");
+                        conexao.close();
                         tipoUsuario = "gold";
+                        ClienteMiddleware.login = login;
+                        ClienteMiddleware.senha = senha;
                         return true;
                     }
                 }
@@ -63,15 +68,14 @@ public class ClienteMiddleware {
             }
 
         }
-        conectado = null;
         return false;
     }
 
     public static boolean cadastrar(String login, String senha, String gold) {
-        System.out.println("tentando cadastrar o usuario "+login+" com a senha "+senha);
+        System.out.println("tentando cadastrar o usuario " + login + " com a senha " + senha);
         for (String ip : ipsServidoresSalas) {
             try {
-                System.out.println("Ok, contatando o servidor"+ip);
+                System.out.println("Ok, contatando o servidor" + ip);
                 ConexaoSegura conexao = new ConexaoSegura(ip, PORTASERVIDORCADASTRO);
                 conexao.envia(login);
                 conexao.envia(senha);
@@ -102,36 +106,36 @@ public class ClienteMiddleware {
         }
         return md5;
     }
-    
-    public static void esperaPartida(int numeroJogadores, String personagem, JFrame janelaInutil){
-        if(conectado != null){
+
+    public static void esperaPartida(int numeroJogadores, String personagem, JFrame janelaInutil) {
+        for (String ip : ipsServidoresSalas) {
             try {
-                conectado.envia(numeroJogadores+"");
+                ConexaoSegura conexaosalas = new ConexaoSegura(ip,PORTAINFOJOGOCLIENTE);
+                conexaosalas.envia(login);
+                conexaosalas.envia(senha);
                 
-                
-                System.out.println("Resposta= "+conectado.recebe());
-                conectado.close();
-                
+                conexaosalas.envia(numeroJogadores + "");
+                System.out.println("Resposta= " + conexaosalas.recebe());
+                conexaosalas.close();
+
                 ServerSocket esperaPartida = new ServerSocket(50050);
                 Conexao conexao = new Conexao(esperaPartida.accept());
                 String ipDoServidor = conexao.getIP();
-                System.out.println("recebeu conexao do servidor de jogo. ip obtido = "+ipDoServidor);
+                System.out.println("recebeu conexao do servidor de jogo. ip obtido = " + ipDoServidor);
                 int porta = Integer.parseInt(conexao.recebe());
                 conexao.close();
-                
+
                 String pastaAtual = System.getProperty("user.dir");
                 Runtime r = Runtime.getRuntime();
                 System.out.println("abriu executavel do jogo");
-                System.out.println("love "+pastaAtual+"/c3fighter "+porta+" "+ipDoServidor+" "+personagem);
-                Process p = r.exec("love "+pastaAtual+"/c3fighter "+porta+" "+ipDoServidor+" "+personagem);
+                System.out.println("love " + pastaAtual + "/c3fighter " + porta + " " + ipDoServidor + " " + personagem);
+                Process p = r.exec("love " + pastaAtual + "/c3fighter " + porta + " " + ipDoServidor + " " + personagem);
                 janelaInutil.setVisible(false);
                 System.exit(0);
             } catch (IOException ex) {
                 Logger.getLogger(ClienteMiddleware.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Você não deve chegar aqui sem estar logado seu malandrinho!");
         }
     }
-    
+
 }

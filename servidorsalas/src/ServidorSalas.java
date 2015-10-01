@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class ServidorSalas {
     public static final int PORTAREGISTRARECURSOS = 50000;
-    public static final int PORTACONECTACLIENTES = 50001;
+    public static final int PORTALOGINCLIENTES = 50001;
+    public static final int PORTAINFOJOGOCLIENTE = 50005;
     public static final int PORTAGERENCIADORDECADASTRO = 50002;
     public static final int PORTATROCAINFOPESO = 50012;
     public static final int PORTAANUNCIALIDER = 50013;
@@ -149,16 +150,18 @@ public class ServidorSalas {
     public static void iniciaThreadsLider(){
         System.out.println("iniciando threads de lider");
         limpaThreads();
-        threadsVivas = new ThreadLimpavel[3];
+        threadsVivas = new ThreadLimpavel[4];
         try {
             IPLiderAtual = InetAddress.getLocalHost().toString().replaceAll("/","");  //getlocalhost bota uma barra no inicio por padrao
             avisaOutrosQueEhLider();
             threadsVivas[0] = new ThreadEnviadorMensagemLiderVivo();
             threadsVivas[0].start();
-            threadsVivas[1] = new ThreadGerenciadorDeSalas();
+            threadsVivas[1] = new ThreadRecebeConexoesLogin();
             threadsVivas[1].start();
             threadsVivas[2] = new ThreadGerenciadorDeCadastro();
             threadsVivas[2].start();
+            threadsVivas[3] = new ThreadRecebeInfoJogoClientes();
+            threadsVivas[3].start();
             
         } catch (UnknownHostException ex) {
             System.out.println("erro abrindo as threads de lider");
