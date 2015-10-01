@@ -21,6 +21,7 @@ public class ThreadLoginCliente extends Thread {
                 for (Jogador jogador : ServidorSalas.jogadores) {
                     if (!jogador.estaLogado && jogador.login.equals(login) && jogador.senha.equals(senha)) {
                         jogador.IP = conexao.getIP();
+                        jogador.estaLogado = true;
                         autenticado = jogador;
                     }
                 }

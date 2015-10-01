@@ -55,5 +55,8 @@ public class Sala implements Serializable{
                     + "completa mas servidor estava indisponivel");
             ex.printStackTrace();
         }
+        for(int x=1;x<jogadores.size();x++){
+            jogadores.get(x).estaLogado=false;
+        }
     }
 }

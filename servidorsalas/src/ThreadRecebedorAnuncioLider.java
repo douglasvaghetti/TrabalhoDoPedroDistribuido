@@ -18,8 +18,12 @@ public class ThreadRecebedorAnuncioLider  extends Thread{
                 String novoIPLider = recebido.split(":")[1];
                 ServidorSalas.IPLiderAtual = novoIPLider;
                 System.out.println("atualizou lider para "+novoIPLider);
-                if(ServidorSalas.ehLider)
+                if(ServidorSalas.ehLider){
                     ServidorSalas.inicioThreadsNaoLider();
+                    SincronizacaoReplicas.sincronizaJogadores();
+                    SincronizacaoReplicas.sincronizaSalas();
+                    SincronizacaoReplicas.sincronizaServidoresDeJogo();
+                }
                 ServidorSalas.ehLider = false;
             }
         } catch (IOException ex) {
